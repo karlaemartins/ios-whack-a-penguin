@@ -10,6 +10,8 @@ final class GameScene: SKScene {
     private var gameScore: SKLabelNode!
     private var slots = [WhackSlot]()
     private var popupTime: TimeInterval = 0.85
+    private var numRounds = 0
+    private var isGameOver = false
     private var score = 0 {
         didSet {
             gameScore.text = "Score: \(score)"
@@ -90,6 +92,25 @@ private extension GameScene {
     }
 
     func createEnemy() {
+        guard !isGameOver else { return }
+
+        numRounds += 1
+
+        if numRounds >= 30 {
+            isGameOver = true
+
+            for slot in slots {
+                slot.hide()
+            }
+
+            let gameOverNode = SKSpriteNode(imageNamed: "gameOver")
+            gameOverNode.position = CGPoint(x: 512, y: 384)
+            gameOverNode.zPosition = 1
+            addChild(gameOverNode)
+
+            return
+        }
+
         popupTime *= 0.991
 
         slots.shuffle()
