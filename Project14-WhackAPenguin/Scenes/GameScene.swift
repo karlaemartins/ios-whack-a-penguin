@@ -107,6 +107,13 @@ private extension GameScene {
             gameOverNode.position = CGPoint(x: 512, y: 384)
             gameOverNode.zPosition = 1
             addChild(gameOverNode)
+            
+            let finalScoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+            finalScoreLabel.text = "Final score: \(score)"
+            finalScoreLabel.position = CGPoint(x: 512, y: 280)
+            finalScoreLabel.fontSize = 42
+            finalScoreLabel.zPosition = 2
+            addChild(finalScoreLabel)
 
             return
         }
